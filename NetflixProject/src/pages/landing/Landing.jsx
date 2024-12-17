@@ -1,11 +1,10 @@
 import React from 'react'
-import Navbar from './components/Navbar'
-
+import Entry from './components/Entry'
 const Landing = () => {
   return (
     <>
 
-        <Navbar/>
+        <Entry/>
         
     </>
   )

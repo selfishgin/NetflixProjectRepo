@@ -1,15 +1,39 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Entry from './components/Entry'
+import Arch from './components/Arch'
 import ReasonToJoin from './components/ReasonToJoin'
-const Landing = () => {
-  return (
-    <>
+import FAQ from './components/FAQ'
+import Container from './components/Container'
+import Trending from './components/Trending'
 
-        <Entry/>
-        <div className='w-full px-[144px] relative'>
-          <ReasonToJoin/>
-        </div>
-    </>
+const Landing = () => {
+  const [scrollY, setScrollY] = useState(0);
+
+  const handleScroll = () => {
+    setScrollY(window.scrollY);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.addEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  return (
+    <div id='landing' className={'w-full relative'}>
+
+      <Entry />
+      <Arch />
+      <Container>
+        <Trending scrollY={scrollY} />
+        <ReasonToJoin />
+        <FAQ />
+      </Container>
+
+
+    </div>
   )
 }
 

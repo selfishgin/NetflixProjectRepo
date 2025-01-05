@@ -5,6 +5,7 @@ import ReasonToJoin from './components/ReasonToJoin'
 import FAQ from './components/FAQ'
 import Container from './components/Container'
 import Trending from './components/Trending'
+import Footer from './components/Footer'
 
 const Landing = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -31,7 +32,7 @@ const Landing = () => {
         <ReasonToJoin />
         <FAQ />
       </Container>
-
+      <Footer />
 
     </div>
   )

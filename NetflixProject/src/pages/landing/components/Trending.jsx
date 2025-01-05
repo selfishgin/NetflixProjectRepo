@@ -6,18 +6,36 @@ import MovieCard from './MovieCard'
 
 const Trending = ({scrollY}) => {
     const [data, setData] = useState([])
-    const [selectedOption, setSelectedOption] = useState("Movie")
+    const [selectedOption, setSelectedOption] = useState({title: "Movies", value: "movie"})
     const [modalOpen, setModalOpen] = useState(false)
     const [selectedItem, setSelectedItem] = useState(null)
 
-    const options = ["Movie", "TV"]
+    const options = [{title: "Movies", value: "movie"}, {title: "TV Shows", value: "tv"}]
 
     const getData = async () => {
         try {
-            const response = await fetch(`http://localhost:5001/api/v1/${selectedOption.toLowerCase()}/trending`)
+            const response = await fetch(`http://localhost:5001/api/v1/${selectedOption.value}/trending`)
             const data = await response.json()
-            console.log(data.content)
             setData(data.content)
+
+            const perChunk = 5
+
+            const inputArray = data.content
+            let resultArray;
+
+            const result = inputArray.reduce((resultArray, item, index) => {
+                const chunkIndex = Math.floor(index / perChunk)
+
+                if (!resultArray[chunkIndex]) {
+                    resultArray[chunkIndex] = []
+                }
+
+                resultArray[chunkIndex].push(item)
+
+                return resultArray
+            }, [])
+            console.log(resultArray)
+
         } catch (error){
             console.error(error)
         }

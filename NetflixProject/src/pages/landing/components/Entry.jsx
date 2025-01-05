@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from './Navbar'
-import EmailInput from './EmailInput'
+import EmailInputForEntry from './EmailInputForEntry'
 
 const Entry = () => {
     return (
@@ -23,7 +23,7 @@ const Entry = () => {
                 <div className='relative font-medium text-[1.25rem] w-[36.5rem] text-white mb-5'>
                     <p>Starts at EUR 7.99. Cancel anytime.</p>
                 </div>
-                <EmailInput />
+                <EmailInputForEntry />
             </div>
         </div>
     )

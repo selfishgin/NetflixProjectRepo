@@ -1,48 +1,22 @@
-import { div, h3 } from "motion/react-client";
-import React, { useState } from "react";
+import React from 'react'
+import { useNavigate } from 'react-router'
+import { useState } from 'react'
 
-const EmailInput = ({ onSubmit }) => {
-    const [email, setEmail] = useState("");
+const EmailInput = () => {
+    const [email, setEmail] = useState('')
+    const navigate = useNavigate()
+  return (
+    <div className='flex items-center h-[55px] w-[580px] mx-auto mt-5 gap-2'>
+        <input value={email} onChange={(e) => {
+            setEmail(e.target.value)
+        }} className='w-full bg-transparent border-[1px] border-zinc-400 h-full px-4 rounded-[4px] text-white' type='email'/>
+        <button onClick={() => {
+            navigate("/signup", {state: {email: email}})
+        }} className='min-w-[200px] flex items-center justify-center bg-[#E50914] hover:bg-[#CE272FFB] text-white'>
+            <svg/>
+        </button>
+    </div>
+  )
+}
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (email.trim() === "") {
-            alert("Please enter a valid email address.");
-            return;
-        }
-        onSubmit(email);
-    };
-
-    return (
-        <form
-            onSubmit={handleSubmit}
-            className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 w-full"
-        >
-            <div className="relative flex-col flex justify-center align-middle items-center">
-                <h3 className="text-white mb-4">Ready to watch? Enter your email to create or restart your membership.</h3>
-                {/* Email Input */}
-                <div className="relative flex-grow flex justify-center gap-1 items-center">
-
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Email address"
-                        className="min-w-[22.5rem] p-4 text-white border border-[#5e5e5e] rounded-md bg-[rgba(22,22,22,0.7)] placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white focus:border-white"
-                    />
-                    <button
-                        type="submit"
-                        className="flex w-[13.5rem] h-[3.5rem] items-center align-middle justify-center px-8 py-4 text-[1.5rem] text-white bg-red-600 rounded-md font-semibold hover:bg-red-700 transition"
-                    >
-                        Get Started
-                        <span className="ml-2 text-lg">&rarr;</span>
-                    </button>
-                </div>
-            </div>
-
-            {/* Get Started Button */}
-        </form>
-    );
-};
-
-export default EmailInput;
+export default EmailInput

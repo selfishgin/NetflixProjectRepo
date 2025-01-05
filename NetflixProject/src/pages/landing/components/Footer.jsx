@@ -1,5 +1,5 @@
 import React from "react";
-import EmailInput from "./EmailInput";
+import EmailInputForEntry from "./EmailInputForEntry";
 
 const Footer = () => {
     return (
@@ -7,7 +7,7 @@ const Footer = () => {
             {/* Top Section */}
 
 
-            <EmailInput />
+            <EmailInputForEntry />
 
 
             <div className="max-w-6xl mx-auto ml-[9rem]">

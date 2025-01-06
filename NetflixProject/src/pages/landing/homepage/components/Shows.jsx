@@ -1,35 +1,48 @@
-import {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react';
+import { motion } from 'motion/react'; // Ensure this is installed and imported correctly
 
 const Shows = () => {
-    const [trendingShows, setTrendingShows] = useState([])
+  const [trendingShows, setTrendingShows] = useState([]);
 
-    const getShows = async () => {
-        try {
-            const response = await fetch(`http://localhost:5001/api/v1/tv/trending`)
-            const data = await response.json()
+  const getShows = async () => {
+    try {
+      const response = await fetch(`http://localhost:5001/api/v1/tv/trending`);
+      const data = await response.json();
 
-            if (response.ok){
-                setTrendingShows(data.content)
-            }
-        }catch (error) {
-            console.error(error)
-        }
+      if (response.ok) {
+        setTrendingShows(data.content);
+      }
+    } catch (error) {
+      console.error('Failed to fetch trending shows:', error);
     }
+  };
 
-    useEffect(() => {
-        getShows()
-    }, [])
+  useEffect(() => {
+    getShows();
+  }, []);
 
   return (
-     <motion.div initial={{opacity: 0}} animate={{opacity: 1, transition: {duration: 0.3}}}>
-        <div className='grid grid-cols-5 px-[90px] pt-[120px] gap-10'>
-            {trendingShows.map(item => <button>
-                <img className='min-w-[180px] h-[250px] hover:scale-110 transition duration-150 ease-in' src={`url(https://image.tmdb.org/t/p/original${visibleShow.backdrop_path})`} alt="" />
-            </button>)}
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1, transition: { duration: 0.3 } }}
+      className="px-[90px] pt-[120px]"
+    >
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        {trendingShows.map((item) => (
+          <button key={item.id} className="relative group">
+            <img
+              className="w-full h-[250px] object-scale-down rounded-md transform hover:scale-110 transition duration-150 ease-in-out"
+              src={`https://image.tmdb.org/t/p/original${item.poster_path}`}
+              alt={item.name || 'Show Poster'}
+            />
+            <div className="absolute bottom-0 left-0 right-0 bg-black/70 text-white text-center py-1 opacity-0 group-hover:opacity-100 transition duration-150 ease-in-out">
+              {item.name}
+            </div>
+          </button>
+        ))}
+      </div>
+    </motion.div>
+  );
+};
 
-        </div>
-     </motion.div>
-  )
-}
-
-export default Shows
+export default Shows;

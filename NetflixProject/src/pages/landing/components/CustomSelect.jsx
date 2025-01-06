@@ -11,8 +11,8 @@ const CustomSelect = ({ selectedOption, setSelectedOption, options }) => {
             onChange={handleChange}
             className="px-4 py-2 bg-zinc-800 text-white rounded-lg text-sm">
             {options.map((option) => (
-                <option key={option} value={option}>
-                    {option}
+                <option key={option.value} value={option.value}>
+                    {option.title}
                 </option>
             ))}
         </select>

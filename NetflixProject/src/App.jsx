@@ -7,18 +7,18 @@ import 'react-toastify/dist/ReactToastify.css';
 import Landing from 'pages/landing/Landing';
 import Homepage from 'pages/landing/homepage/Homepage';
 import NotFound from './common/NotFound';
-// import { useStore } from 'zustand';
-// import { themeStore } from 'common/Store.js';
+import { useStore } from 'zustand';
+import { themeStore } from 'common/Store.js';
 
 function App() {
-  // const { token } = useStore(themeStore);
+  const { token } = useStore(themeStore);
 
   return (
     <div className="max-w-[1440px] mx-auto h-full min-h-screen w-full transition duration-300 ease-in-out overflow-hidden">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Landing />} />
-          {/* {token && <Route path="/home" element={<Homepage />} />} */}
+          {token && <Route path="/home" element={<Homepage />} />}
           <Route path="/home" element={<Homepage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />

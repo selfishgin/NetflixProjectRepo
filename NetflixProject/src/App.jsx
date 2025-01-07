@@ -6,6 +6,7 @@ import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
 import Landing from 'pages/landing/Landing';
 import Homepage from 'pages/landing/homepage/Homepage';
+import Details from './pages/landing/homepage/components/Details';
 import NotFound from './common/NotFound';
 import { useStore } from 'zustand';
 import { themeStore } from 'common/Store.js';
@@ -20,6 +21,10 @@ function App() {
           <Route path="/" element={<Landing />} />
           {token && <Route path="/home" element={<Homepage />} />}
           <Route path="/home" element={<Homepage />} />
+          {/* // DETAILS  */}
+          <Route path="/details/:id" element={<Details />} /> 
+          {/* {token && <Route path="/detail/:id" element={<Details />} />} */}
+    
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="*" element={<NotFound />} />

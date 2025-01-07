@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
+import { useNavigate } from 'react-router';
 
 const Movies = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
+  const navigate = useNavigate();
 
   const getMovies = async () => {
     try {
@@ -30,7 +32,9 @@ const Movies = () => {
     >
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
         {trendingMovies.map((item) => (
-          <button key={item.id || item.title} className="relative group">
+          <button key={item.id || item.title} className="relative group" onClick={() => { // BURADA
+                navigate(`/details/${item.id}`) // burada
+          }}>
             <img
               className="w-full h-[250px] object-scale-down rounded-md transform hover:scale-110 transition duration-150 ease-in-out"
               src={`https://image.tmdb.org/t/p/original${item.poster_path}`}

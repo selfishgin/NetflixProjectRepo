@@ -3,7 +3,7 @@ import netflixLogo from 'src/assets/NetflixLogo.png';
 
 const Navbar = ({ selectedTab, setSelectedTab, tabItems }) => {
   return (
-    <nav className="absolute top-0 left-0 max-w-[1440px] w-screen z-10 flex items-center justify-between px-6 py-4 ">
+    <nav className="absolute top-0 left-0 max-w-[1440px] w-screen z-10 flex items-center justify-between px-[90px] py-4 ">
       {/* Netflix Logo */}
       <img
         src={netflixLogo}

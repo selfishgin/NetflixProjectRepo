@@ -18,7 +18,7 @@ const Details = () => {
             const response = await fetch(`http://localhost:5001/api/v1/movie/${id}/details`, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzYxNGJjYjk0MDU2NDBmODQ2Yjk4OTciLCJpYXQiOjE3MzY0MzQ5NjUsImV4cCI6MTczNzczMDk2NX0.3Rv4NUODVt7F9QO0tYwSyMSeEr1h8B_WVe0jvJ-vqPs`, // MAKE IT WORK DYNAMICALLY
+                     // MAKE IT WORK DYNAMICALLY
                 },
             });
 
@@ -45,7 +45,7 @@ const Details = () => {
             const response = await fetch(`http://localhost:5001/api/v1/movie/${id}/trailers`, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzYxNGJjYjk0MDU2NDBmODQ2Yjk4OTciLCJpYXQiOjE3MzY0MzQ5NjUsImV4cCI6MTczNzczMDk2NX0.3Rv4NUODVt7F9QO0tYwSyMSeEr1h8B_WVe0jvJ-vqPs`, // MAKE IT WORK DYNAMICALLY
+                    // MAKE IT WORK DYNAMICALLY
                 },
             });
 

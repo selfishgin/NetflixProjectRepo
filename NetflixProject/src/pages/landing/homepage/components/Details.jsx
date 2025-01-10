@@ -2,24 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useStore } from 'zustand';
 import { themeStore } from 'common/Store.js';
-
+import Trending from '../../components/Trending';
+import Similar from './Similar';
 
 const Details = () => {
     const { token } = useStore(themeStore);
 
     const navigate = useNavigate(); // For navigation
     const location = useLocation(); // Get the query parameters
-    const {id, type} = location.state
+    const { id, type } = location.state
     console.log(id, type)
     const [contentDetails, setContentDetails] = useState(null); // State for content details
     const [trailer, setTrailer] = useState(null); // State for trailer
     const [error, setError] = useState(null); // State for errors
     const [loading, setLoading] = useState(true); // State for loading
- 
+
     // Fetch content details
     const fetchDetails = async () => {
         try {
-            console.log(`Fetching details for movie ID:`, id);
+            console.log(`Fetching details for ${type} ID:`, id);
 
             const response = await fetch(`http://localhost:5001/api/v1/${type}/${id}/details`, {
                 headers: {
@@ -33,11 +34,11 @@ const Details = () => {
                 setContentDetails(data.content || {}); // Set content details
             } else {
                 console.error('API Error (Details):', data.message);
-                setError(data.message || `Failed to fetch movie details.`);
+                setError(data.message || `Failed to fetch ${type} details.`);
             }
         } catch (error) {
             console.error('Fetch Error (Details):', error);
-            setError(`Failed to fetch movie details. Please check your connection.`);
+            setError(`Failed to fetch ${type} details. Please check your connection.`);
         } finally {
             setLoading(false); // Stop the loading state
         }
@@ -73,6 +74,8 @@ const Details = () => {
             console.error('Fetch Error (Trailer):', error);
         }
     };
+
+
 
 
     useEffect(() => {
@@ -169,6 +172,8 @@ const Details = () => {
         );
     };
 
+
+
     return (
         <div>
             <div className="p-6">
@@ -179,12 +184,18 @@ const Details = () => {
                     Go Back
                 </button>
             </div>
-            <div className='flex flex-col justify-center items-center'>
-                {renderDetails()}
-                {renderTrailer()}
+
+            <div className='py-30'>
+                <div className='flex flex-col justify-center items-center'>
+                    {renderDetails()}
+                    {renderTrailer()}
+                </div>
+                <div className=''>
+                    <Similar id={id} />
+
+                </div>
 
             </div>
-
 
         </div>
     );

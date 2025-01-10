@@ -33,7 +33,7 @@ const Movies = () => {
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
         {trendingMovies.map((item) => (
           <button key={item.id || item.title} className="relative group" onClick={() => { // BURADA
-                navigate(`/details/${item.id}`) // burada
+                navigate(`/details`, {state: {id: item.id, type: item.media_type}}) // burada
           }}>
             <img
               className="w-full h-[250px] object-scale-down rounded-md transform hover:scale-110 transition duration-150 ease-in-out"

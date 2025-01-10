@@ -1,24 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useStore } from 'zustand';
+import { themeStore } from 'common/Store.js';
+
 
 const Details = () => {
-    const { id } = useParams(); // Get the content ID from the URL
+    const { token } = useStore(themeStore);
+
     const navigate = useNavigate(); // For navigation
     const location = useLocation(); // Get the query parameters
+    const {id, type} = location.state
+    console.log(id, type)
     const [contentDetails, setContentDetails] = useState(null); // State for content details
     const [trailer, setTrailer] = useState(null); // State for trailer
     const [error, setError] = useState(null); // State for errors
     const [loading, setLoading] = useState(true); // State for loading
-    const type = new URLSearchParams(location.search).get('type') || 'movie'; // Get the content type (default to movie)
-
+ 
     // Fetch content details
     const fetchDetails = async () => {
         try {
             console.log(`Fetching details for movie ID:`, id);
-            const response = await fetch(`http://localhost:5001/api/v1/movie/${id}/details`, {
+
+            const response = await fetch(`http://localhost:5001/api/v1/${type}/${id}/details`, {
                 headers: {
                     'Content-Type': 'application/json',
-                     // MAKE IT WORK DYNAMICALLY
+                    Authorization: `Bearer ${token}`,// MAKE IT WORK DYNAMICALLY
                 },
             });
 
@@ -41,11 +47,12 @@ const Details = () => {
     // Fetch content trailer
     const fetchTrailer = async () => {
         try {
-            console.log(`Fetching trailer for movie ID:`, id);
-            const response = await fetch(`http://localhost:5001/api/v1/movie/${id}/trailers`, {
+            console.log(`Fetching trailer for ${type} ID:`, id);
+
+            const response = await fetch(`http://localhost:5001/api/v1/${type}/${id}/trailers`, {
                 headers: {
                     'Content-Type': 'application/json',
-                    // MAKE IT WORK DYNAMICALLY
+                    Authorization: `Bearer ${token}`// MAKE IT WORK DYNAMICALLY
                 },
             });
 
@@ -69,6 +76,7 @@ const Details = () => {
 
 
     useEffect(() => {
+        console.log("USEEFFECT")
         fetchDetails(); // Fetch content details
         fetchTrailer(); // Fetch trailer
     }, [id]);

@@ -18,7 +18,7 @@ const Home = ({ visibleMovie }) => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, transition: { duration: 0.3 } }}
-      className="relative w-full h-screen bg-cover bg-center"
+      className="absolute top-0 left-0 z-[-1] h-screen w-screen bg-cover bg-center bg-no-repeat"
       style={{
         backgroundImage: `url(https://image.tmdb.org/t/p/original${backdrop_path})`,
       }}

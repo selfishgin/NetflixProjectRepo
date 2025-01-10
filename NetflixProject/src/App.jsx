@@ -20,9 +20,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Landing />} />
           {token && <Route path="/home" element={<Homepage />} />}
-          <Route path="/home" element={<Homepage />} />
+        
           {/* // DETAILS  */}
-          <Route path="/details/:id" element={<Details />} /> 
+          <Route path="/details" element={<Details />} /> 
           {/* {token && <Route path="/detail/:id" element={<Details />} />} */}
     
           <Route path="/login" element={<Login />} />

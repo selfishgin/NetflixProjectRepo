@@ -6,11 +6,11 @@ export const themeStore = create(
         set => (
             {
                 theme: "light",
-                accessToken: "",
-                refreshToken: "",
+                token: "",
+      
                 toggle: () => set((prevState) => ({...prevState, theme: prevState.theme === "light" ? "dark" : "light"})),
-                addAccessToken: (token) => set((prevState) => ({...prevState, accessToken: token})),
-                addRefreshToken: (token) => set((prevState) => ({...prevState, refreshToken: token})),
+                addAccessToken: (token) => set((prevState) => ({...prevState, token: token})),
+               
             }
         )
     )

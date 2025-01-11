@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useStore } from 'zustand';
 import { themeStore } from 'common/Store.js';
-import Trending from '../../components/Trending';
 import Similar from './Similar';
 
 const Details = () => {
@@ -79,7 +78,6 @@ const Details = () => {
 
 
     useEffect(() => {
-        console.log("USEEFFECT")
         fetchDetails(); // Fetch content details
         fetchTrailer(); // Fetch trailer
     }, [id]);
@@ -191,7 +189,7 @@ const Details = () => {
                     {renderTrailer()}
                 </div>
                 <div className=''>
-                    <Similar id={id} />
+                    <Similar id={id} type={type}/>
 
                 </div>
 

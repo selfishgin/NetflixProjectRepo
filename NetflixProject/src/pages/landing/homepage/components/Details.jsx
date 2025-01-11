@@ -188,7 +188,7 @@ const Details = () => {
                     {renderDetails()}
                     {renderTrailer()}
                 </div>
-                <div className=''>
+                <div className='flex justify-center items-center'>
                     <Similar id={id} type={type}/>
 
                 </div>

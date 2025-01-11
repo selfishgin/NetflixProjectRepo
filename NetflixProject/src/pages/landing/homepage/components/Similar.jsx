@@ -1,23 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Modal from 'src/pages/landing/components/Modal';
-import CustomSelect from 'src/pages/landing/components/CustomSelect';
 import MovieCard from 'src/pages/landing/components/MovieCard';
 import { useStore } from 'zustand';
 import { themeStore } from 'common/Store.js';
 
+
 const Similar = ({ id, type: initialType }) => {
   const { token } = useStore(themeStore);
 
-
   const [data, setData] = useState([]);
-  const [selectedType, setSelectedType] = useState(initialType || 'movie'); // Default to 'movie'
+  const [selectedType] = useState(initialType || 'movie'); // Default to 'movie'
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
 
-  const options = [
-    { title: 'Movies', value: 'movie' },
-    { title: 'TV Shows', value: 'tv' },
-  ];
+
+  const carouselRef = useRef(null); // Ref for the movie card container
 
   const fetchSimilarData = async () => {
     try {
@@ -43,6 +40,16 @@ const Similar = ({ id, type: initialType }) => {
     }
   };
 
+  const handleScroll = (direction) => {
+    if (carouselRef.current) {
+      const scrollAmount = 300; // Adjust this for the scrolling distance
+      carouselRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth',
+      });
+    }
+  };
+
   const handleModalClose = () => {
     setModalOpen(false);
     setSelectedItem(null);
@@ -61,28 +68,48 @@ const Similar = ({ id, type: initialType }) => {
   }, [selectedItem]);
 
   return (
-    <div className="w-full py-20 mt-20 h-fit relative">
+    <div className="w-[90%] py-20 mt-[300px] h-fit relative ">
       <h3 className="text-white text-2xl font-semibold mb-4">Similar Content</h3>
 
-      {/* Dropdown Selector */}
+      <div className="relative flex items-center w-full">
+        {/* Left Button */}
+        <button
+          onClick={() => handleScroll('left')}
+          className="absolute left-0 bg-gray-800 text-white py-8 px-2 rounded-full z-10 hover:bg-gray-700"
+          style={{ transform: 'translateY(-50%)', top: '50%' }}
+        >
+          &#9664; {/* Left Arrow */}
+        </button>
 
+        {/* Movie Cards */}
+        <div
+          ref={carouselRef}
+          className="w-[full] flex gap-4 overflow-x-hidden py-5 pl-7 scrollbar-thin scrollbar-thumb-gray-500"
+        >
+          {data.length > 0 ? (
+            data.map((item, index) => (
+              <MovieCard
+                key={index}
+                setSelectedItem={setSelectedItem}
+                item={item}
+                index={index}
+              />
+            ))
+          ) : (
+            <div className="text-white text-center w-full">
+              No similar content available.
+            </div>
+          )}
+        </div>
 
-      {/* Render Similar Content */}
-      <div className="w-full flex gap-12 overflow-x-auto py-5 pl-7 scrollbar-thin scrollbar-thumb-gray-500">
-        {data.length > 0 ? (
-          data.map((item, index) => (
-            <MovieCard
-              key={index}
-              setSelectedItem={setSelectedItem}
-              item={item}
-              index={index}
-            />
-          ))
-        ) : (
-          <div className="text-white text-center w-full">
-            No similar content available.
-          </div>
-        )}
+        {/* Right Button */}
+        <button
+          onClick={() => handleScroll('right')}
+          className="absolute right-0 bg-gray-800 text-white py-8 px-2 rounded-full z-10 hover:bg-gray-700"
+          style={{ transform: 'translateY(-50%)', top: '50%' }}
+        >
+          &#9654; {/* Right Arrow */}
+        </button>
       </div>
 
       {/* Modal for Item Details */}

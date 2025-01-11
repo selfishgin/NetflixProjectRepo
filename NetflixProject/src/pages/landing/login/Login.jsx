@@ -1,17 +1,28 @@
 import React, { useState } from 'react';
 import Form from '/src/common/Form.jsx';
 import { useNavigate } from 'react-router';
-import { themeStore } from 'common/Store.js'; // Correct store import
+import { themeStore } from 'common/Store.js';
+import { toast, ToastContainer, Bounce } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
-  const addAccessToken = themeStore((state) => state.addAccessToken); // Access the method from themeStore
+  const addAccessToken = themeStore((state) => state.addAccessToken);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
-  const [error, setError] = useState(null); // For handling error messages
 
   const login = async () => {
     if (!formData.email || !formData.password) {
-      setError('Please fill out all fields.');
+      toast.error('Please fill out all fields.', {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark',
+        transition: Bounce,
+      });
       return;
     }
 
@@ -19,7 +30,7 @@ const Login = () => {
       const response = await fetch('http://localhost:5001/api/v1/auth/login', {
         method: 'POST',
         headers: {
-          'Accept': 'application/json',
+          Accept: 'application/json',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
@@ -27,13 +38,33 @@ const Login = () => {
 
       const data = await response.json();
       if (response.ok) {
-        addAccessToken(data.token); // Store the token
-        navigate('/home'); // Redirect after successful login
+        addAccessToken(data.token);
+        navigate('/home');
       } else {
-        setError(data.message || 'Login failed'); // Display error message if any
+        toast.error(data.message || 'Login failed', {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'dark',
+          transition: Bounce,
+        });
       }
     } catch (error) {
-      setError('An error occurred, please try again later.');
+      toast.error('An error occurred, please try again later.', {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark',
+        transition: Bounce,
+      });
       console.error(error);
     }
   };
@@ -72,6 +103,7 @@ const Login = () => {
 
   return (
     <div className="relative w-full h-screen flex items-center justify-center bg-cover bg-no-repeat bg-center bg-[url('src/assets/NetflixBackground.jpg')]">
+      <ToastContainer />
       <button onClick={() => navigate('/')}>
         <img
           className="w-[90px] md:w-[120px] lg:w-[160px] absolute top-[24px] left-[168px]"
@@ -89,11 +121,6 @@ const Login = () => {
         formButtons={formButtons}
         formStyle="w-[450px] h-[470px] bg-black/70 px-[68px] pt-[48px] flex flex-col gap-4 rounded-[4px]"
       />
-      {error && (
-        <div className="text-red-500 mt-4 text-center">
-          {error}
-        </div>
-      )}
     </div>
   );
 };

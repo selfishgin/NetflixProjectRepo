@@ -2,6 +2,7 @@ import React from 'react'
 import Navbar from './Navbar'
 import EmailInputForEntry from './EmailInputForEntry'
 
+
 const Entry = () => {
     return (
         <div className="relative h-screen">

@@ -90,7 +90,7 @@ const Navbar = () => {
                         <div>
                             <button
                                 onClick={() => navigate('/login')}
-                                className='bg-red-600 rounded p-1 h-[42px] w-[5rem] text-white'>
+                                className='bg-red-600 hover:bg-red-700 rounded p-1 h-[42px] w-[5rem] text-white'>
                                 Sign in
                             </button>
                         </div>

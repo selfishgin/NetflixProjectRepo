@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Modal from 'src/pages/landing/components/Modal';
 import MovieCard from 'src/pages/landing/components/MovieCard';
 import { useStore } from 'zustand';
 import { themeStore } from 'common/Store.js';
+import { useTranslation } from 'react-i18next';
 
 
 const Similar = ({ id, type: initialType }) => {
   const { token } = useStore(themeStore);
+  const { t } = useTranslation();
+
 
   const [data, setData] = useState([]);
   const [selectedType] = useState(initialType || 'movie'); // Default to 'movie'
@@ -69,7 +71,7 @@ const Similar = ({ id, type: initialType }) => {
 
   return (
     <div className="w-[90%] py-20 mt-[300px] h-fit relative ">
-      <h3 className="text-white text-2xl font-semibold mb-4">Similar Content</h3>
+      <h3 className="text-white text-2xl font-semibold mb-4">{t('similarContent')}</h3>
 
       <div className="relative flex items-center w-full">
         {/* Left Button */}
@@ -114,9 +116,10 @@ const Similar = ({ id, type: initialType }) => {
       </div>
 
 
-      {modalOpen && (
+      {/* {modalOpen && (
         <Modal data={selectedItem} handleModalClose={handleModalClose} /> // ???????
-      )}
+      )} */}
+
     </div>
   );
 };

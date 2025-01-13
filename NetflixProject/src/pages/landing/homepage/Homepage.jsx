@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Home from './components/Home';
 import Shows from './components/Shows';
 import Movies from './components/Movies';
@@ -8,18 +9,20 @@ const Homepage = () => {
   const [selectedTab, setSelectedTab] = useState({ value: 'home' }); // Initialize with a default tab
   const [trendingMovies, setTrendingMovies] = useState([]);
   const [trendingShows, setTrendingShows] = useState([]);
+  const { t } = useTranslation();
+
 
   const tabItems = [
     {
-      title: 'Home',
+      title: t('home'),
       value: 'home',
     },
     {
-      title: 'TV Shows',
+      title: t('tvShowsTrending'),
       value: 'tv',
     },
     {
-      title: 'Movies',
+      title: t('moviesTrending'),
       value: 'movies',
     },
   ];

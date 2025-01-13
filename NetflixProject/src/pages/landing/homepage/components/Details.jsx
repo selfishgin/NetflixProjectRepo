@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useStore } from 'zustand';
 import { themeStore } from 'common/Store.js';
+import { useTranslation } from 'react-i18next';
 import Similar from './Similar';
 
 const Details = () => {
     const { token } = useStore(themeStore);
+    const { t } = useTranslation();
 
     const navigate = useNavigate(); // For navigation
     const location = useLocation(); // Get the query parameters
@@ -115,14 +117,13 @@ const Details = () => {
                     <div className='mt-25 h-[100px]'>
                         <div className='w-[500px]'>
                             <p className="text-white mb-4">
-                                <strong>Description:</strong>{' '}
+                                <strong>{t('description')}:</strong>{' '}
                                 {contentDetails.overview || 'No description available.'}
                             </p>
                         </div>
-
                         <div className='w-[500px]'>
                             <p className="text-white mb-4">
-                                <strong>Release Date:</strong>{' '}
+                                <strong>{t('releaseDate')}:</strong>{' '}
                                 {contentDetails.release_date || 'Unknown'}
                             </p>
 
@@ -130,7 +131,7 @@ const Details = () => {
 
                         <div className='w-[500px]'>
                             <p className="text-white mb-4">
-                                <strong>Rating:</strong> {contentDetails.vote_average || 'Not Rated'}
+                                <strong>{t('rating')}:</strong> {contentDetails.vote_average || 'Not Rated'}
                             </p>
 
                         </div>
@@ -138,7 +139,7 @@ const Details = () => {
                         <div className='w-[500px]'>
                             {contentDetails.genres && (
                                 <p className="text-white mb-4">
-                                    <strong>Genres:</strong>{' '}
+                                    <strong>{t('genres')}:</strong>{' '}
                                     {contentDetails.genres.map((genre) => genre.name).join(', ')}
                                 </p>
                             )}
@@ -179,7 +180,7 @@ const Details = () => {
                     onClick={() => navigate(-1)}
                     className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-500 mb-4"
                 >
-                    Go Back
+                    {t('goBack')}
                 </button>
             </div>
 

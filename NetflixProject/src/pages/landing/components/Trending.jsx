@@ -2,18 +2,22 @@ import React, { useState, useEffect, useRef } from 'react';
 import Modal from './Modal';
 import CustomSelect from './CustomSelect';
 import MovieCard from './MovieCard';
+import { useTranslation } from 'react-i18next';
+
 
 const Trending = ({ scrollY }) => {
   const [data, setData] = useState([]);
   const [selectedOption, setSelectedOption] = useState('movie'); // Updated to match the value used in CustomSelect
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  const { t } = useTranslation();
+
 
   const carouselRef = useRef(null); // Ref for the card container
 
   const options = [
-    { title: 'Movies', value: 'movie' },
-    { title: 'TV Shows', value: 'tv' },
+    { title: t('moviesTrending'), value: 'movie' },
+    { title: t('tvShowsTrending'), value: 'tv' },
   ];
 
   const getData = async () => {
@@ -66,7 +70,7 @@ const Trending = ({ scrollY }) => {
 
   return (
     <div className="w-full py-20 relative">
-      <h3 className="text-white text-2xl font-semibold mb-4">Trending Now</h3>
+      <h3 className="text-white text-2xl font-semibold mb-4">{t('trendingNow')}</h3>
 
       {/* Dropdown Selector */}
       <CustomSelect

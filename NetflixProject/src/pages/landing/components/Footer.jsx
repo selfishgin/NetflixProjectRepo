@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import EmailInputForEntry from "./EmailInputForEntry";
+import { useTranslation } from 'react-i18next';
+
 
 const Footer = () => {
     const [selectedLanguage, setSelectedLanguage] = useState("English");
     const [isOpen, setIsOpen] = useState(false);
+    const { t } = useTranslation();
+    
 
     const languages = [
         { value: "en", label: "English" },
@@ -19,54 +23,56 @@ const Footer = () => {
                 {/* Links Section */}
                 <div className="mt-20">
                     <a href="#" className="underline">
-                        Questions? Contact us.
+                        {t('questionsContactUs')}
                     </a>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm mt-12">
                     <a href="#" className="underline">
-                        FAQ
+                        {t('faq')}
                     </a>
                     <a href="#" className="underline">
-                        Help Center
+                        {t('helpCenter')}
+                        
                     </a>
                     <a href="#" className="underline">
-                        Account
+                        {t('account')}
+                        
                     </a>
                     <a href="#" className="underline">
-                        Media Center
+                        {t('mediaCenter')}
                     </a>
                     <a href="#" className="underline">
-                        Investor Relations
+                        {t('investorRelations')}
                     </a>
                     <a href="#" className="underline">
-                        Jobs
+                        {t('jobs')}
                     </a>
                     <a href="#" className="underline">
-                        Ways to Watch
+                        {t('waysToWatch')}
                     </a>
                     <a href="#" className="underline">
-                        Terms of Use
+                        {t('termsOfUse')}
                     </a>
                     <a href="#" className="underline">
-                        Privacy
+                        {t('privacy')} 
                     </a>
                     <a href="#" className="underline">
-                        Cookie Preferences
+                        {t('cookiePreferences')}
                     </a>
                     <a href="#" className="underline">
-                        Corporate Information
+                        {t('corporateInformation')}
                     </a>
                     <a href="#" className="underline">
-                        Contact Us
+                        {t('contactUs')}
                     </a>
                     <a href="https://fast.com/" target="_blank" className="underline">
-                        Speed Test
+                        {t('speedTest')}
                     </a>
                     <a href="#" className="underline">
-                        Legal Notices
+                        {t('legalNotices')}
                     </a>
                     <a href="#" className="underline">
-                        Only on Netflix
+                        {t('onlyOnNetflix')}
                     </a>
                 </div>
 
@@ -137,7 +143,7 @@ const Footer = () => {
                 </div>
 
                 {/* Footer Branding */}
-                <p className="mt-8 text-center flex justify-start">Netflix Azerbaijan</p>
+                <p className="mt-8 text-center flex justify-start">{t('netflixAzerbaijan')}</p>
             </div>
         </div>
     );

@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useTranslation } from 'react-i18next';
 import Form from "/src/common/Form.jsx";
 
 const SignUp = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
 
   // Get email from location state or default to an empty string
   const emailFromState = location.state?.email || "";
@@ -60,14 +63,14 @@ const SignUp = () => {
       label: "",
       name: "username",
       type: "text",
-      placeholder: "Username",
+      placeholder: t('usernamePlaceholder'),
       inputStyle: "p-4 bg-transparent border-[1px] border-zinc-400 rounded-[4px] text-white",
     },
     {
       label: "",
       name: "email",
       type: "email",
-      placeholder: "Email",
+      placeholder: t('emailPlaceholder'),
       value: formData.email,
       readOnly: !!emailFromState, // Make email read-only if passed via state
       inputStyle: "p-4 bg-transparent border-[1px] border-zinc-400 rounded-[4px] text-white",
@@ -76,19 +79,19 @@ const SignUp = () => {
       label: "",
       name: "password",
       type: "password",
-      placeholder: "Password",
+      placeholder: t('passwordPlaceholder'),
       inputStyle: "p-4 bg-transparent border-[1px] border-zinc-400 rounded-[4px] text-white",
     },
   ];
 
   const formButtons = [
     {
-      title: "Sign Up",
+      title: t('signUp'),
       style: "bg-[#E50914] text-white font-medium py-3 rounded-[4px] w-full",
       action: signup,
     },
     {
-      title: "Already a member? Sign in now",
+      title: t('alreadyMemberSignIn'),
       style: "text-zinc-300 w-full mt-[25px]",
       action: () => navigate("/login"),
     },
@@ -105,7 +108,7 @@ const SignUp = () => {
       </button>
       <Form
         headerText={{
-          title: "Sign Up",
+          title: t('signUp'),
           style: "text-white font-bold text-[32px]",
         }}
         formItems={formItems}

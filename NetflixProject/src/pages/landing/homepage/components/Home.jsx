@@ -1,8 +1,12 @@
 import React from 'react';
 import top10 from '/src/icons/Top10.svg';
 import { motion } from 'motion/react';
+import { useTranslation } from 'react-i18next';
+
 
 const Home = ({ visibleMovie }) => {
+  const { t } = useTranslation();
+
   // console.log(visibleMovie)
   if (!visibleMovie) { 
     return (
@@ -32,18 +36,18 @@ const Home = ({ visibleMovie }) => {
         <div className="flex items-center gap-2 my-5">
           <img src={top10} alt="Top 10 Icon" className="w-10 h-10" />
           <h3 className="text-white text-xl md:text-2xl font-bold">
-            #1 in Movies Today
+            {t('numberOneInMoviesToday')}
           </h3>
         </div>
         <p className="text-white text-sm md:text-base">
-          {overview?.slice(0, 150)}...
+          {overview?.slice(0, 150)} ...
         </p>
         <div className="flex items-center gap-3 mt-5">
           <button className="bg-white text-black font-bold px-4 md:px-6 py-2 md:py-3 rounded-[4px] hover:bg-zinc-300">
-            Play
+            {t('play')}
           </button>
           <button className="bg-[#515451] text-white font-bold px-4 md:px-6 py-2 md:py-3 rounded-[4px] hover:bg-zinc-300">
-            More Info
+            {t('moreInfo')}
           </button>
         </div>
       </div>

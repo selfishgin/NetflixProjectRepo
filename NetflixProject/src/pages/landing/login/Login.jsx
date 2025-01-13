@@ -3,12 +3,15 @@ import Form from '/src/common/Form.jsx';
 import { useNavigate } from 'react-router';
 import { themeStore } from 'common/Store.js';
 import { toast, ToastContainer, Bounce } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const addAccessToken = themeStore((state) => state.addAccessToken);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
+  const { t } = useTranslation();
+
 
   const login = async () => {
     if (!formData.email || !formData.password) {
@@ -74,26 +77,27 @@ const Login = () => {
       label: '',
       name: 'email',
       type: 'email',
-      placeholder: 'Email',
+      placeholder: t('emailPlaceholder'),
       inputStyle: 'p-4 bg-transparent border-[1px] border-zinc-400 rounded-[4px] text-white',
     },
     {
       label: '',
       name: 'password',
       type: 'password',
-      placeholder: 'Password',
+      placeholder: t('passwordPlaceholder'),
       inputStyle: 'p-4 bg-transparent border-[1px] border-zinc-400 rounded-[4px] text-white',
     },
   ];
 
   const formButtons = [
     {
-      title: 'Sign In',
+      // title: 'Sign In',
+      title: t('signIn'),
       style: 'bg-[#E50914] text-white font-medium py-3 rounded-[4px] w-full',
       action: login,
     },
     {
-      title: 'New to Netflix? Sign up now',
+      title: t('newToNetflixSignUp'),
       style: 'text-zinc-300 w-full mt-[25px]',
       action: () => {
         navigate('/signup');
@@ -113,7 +117,7 @@ const Login = () => {
       </button>
       <Form
         headerText={{
-          title: 'Sign In',
+          title: t('signIn'),
           style: 'text-white font-bold text-[32px]',
         }}
         formItems={formItems}

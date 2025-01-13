@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
+
 
 const EmailInputForEntry = () => {
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,21 +25,21 @@ const EmailInputForEntry = () => {
     >
       <div className="relative flex-col flex justify-center align-middle items-center">
         <h3 className="text-white mb-4">
-          Ready to watch? Enter your email to create or restart your membership.
+          {t('readyToWatch')}
         </h3>
         <div className="relative flex-grow flex justify-center gap-1 items-center">
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email address"
+            placeholder={t('emailAddress')} //translate
             className="min-w-[22.5rem] p-4 text-white border border-[#5e5e5e] rounded-md bg-[rgba(22,22,22,0.7)] placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white focus:border-white "
           />
           <button
             type="submit"
             className="flex w-[13.5rem] h-[3.5rem] items-center align-middle justify-center px-8 py-4 text-[1.5rem] text-white bg-red-600 rounded-md font-semibold hover:bg-red-700 transition"
           >
-            Get Started
+            {t('entryCTA')}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

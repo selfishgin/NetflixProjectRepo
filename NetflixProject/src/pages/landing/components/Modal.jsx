@@ -4,11 +4,13 @@ import { motion } from "motion/react"
 import { createPortal } from "react-dom";
 import { useEffect } from 'react';
 import { div } from 'motion/react-client';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom'; // Import the useNavigate hook
 
 
 const Modal = ({ data, handleModalClose, scrollY }) => {
     const navigate = useNavigate(); // Initialize the navigate function
+    const { t } = useTranslation();
 
 
     useEffect(() => {
@@ -47,7 +49,7 @@ const Modal = ({ data, handleModalClose, scrollY }) => {
                             <p className='text-white'>{data.overview}</p>
 
                             <div className='justify-center items-center'>
-                                <button className='text-[18px] flex flex-row gap-1 justify-center items-center align-middle bg-[#E50914] hover:bg-[#CE272FFB] text-white w-[150px] h-[50px] rounded-[4px] mt-5 py-3' onClick={() => navigate('/signup')}> Get Started
+                                <button className='text-[18px] flex flex-row gap-1 justify-center items-center align-middle bg-[#E50914] hover:bg-[#CE272FFB] text-white w-[150px] h-[50px] rounded-[4px] mt-5 py-3' onClick={() => navigate('/signup')}> {t('entryCTA')}
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" role="img" viewBox="0 0 16 16" width="16" height="16" data-icon="ChevronRightSmall" aria-hidden="true" class="default-ltr-cache-137pweu eo5tv5s0"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.4371 8.00153L4.96857 2.53295L6.02923 1.47229L12.0281 7.4712C12.1688 7.61185 12.2478 7.80262 12.2478 8.00153C12.2478 8.20044 12.1688 8.39121 12.0281 8.53186L6.02923 14.5308L4.96857 13.4701L10.4371 8.00153Z" fill="currentColor"></path></svg>
                                 </button>
 
